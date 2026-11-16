@@ -1,0 +1,415 @@
+/* ============ PAGINA DE REGISTRO ============ */
+
+/* misma paleta que css.css */
+:root {
+  --azul: #16213e;
+  --azul-hover: #1c2b4f;
+  --dorado: #c8963e;
+  --crema: #faf9f4;
+  --borde: #e7e2d6;
+  --texto: #1a1a1a;
+  --gris: #767268;
+  --verde: #2f6b4f;
+  --amarillo: #daa520;
+  --amarillo-hover: #966906;
+  --granate: #9b2c35;
+
+  /* color del perfil elegido (cambia con data-rol) */
+  --acento: var(--azul);
+  --tinte: #eef4fa;
+  --tinte-borde: #c7d5e3;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  background: var(--crema);
+  color: var(--texto);
+}
+
+.oculto { display: none !important; }
+
+/* ---------- LAYOUT: dos paneles ---------- */
+.pagina {
+  display: grid;
+  grid-template-columns: 5fr 6fr;
+  min-height: 100vh;
+}
+
+/* ---------- PANEL IZQUIERDO ---------- */
+.lateral {
+  background: var(--azul);
+  color: white;
+  padding: 44px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.logo-image {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+.logo-icono {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 9px;
+}
+.logo-icono span {
+  background: var(--dorado);
+  border-radius: 2px;
+}
+
+.logo-nombre {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: white;
+}
+.logo-nombre em {
+  color: var(--dorado);
+  font-style: normal;
+}
+
+.lateral-texto h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 52px;
+  line-height: 1.08;
+  margin: 0 0 22px 0;
+  max-width: 460px;
+}
+
+.lateral-texto p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+  max-width: 420px;
+  margin: 0;
+}
+
+/* leyenda de perfiles */
+.leyenda {
+  list-style: none;
+  margin: 0;
+  padding: 24px 0 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.85);
+}
+.leyenda li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.punto {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 2px solid white;
+}
+.punto-ayto { background: white; border-color: white; }
+.punto-org  { background: #5fa886; border-color: #5fa886; }
+.punto-fer  { background: #b8565b; border-color: #b8565b; }
+
+/* ---------- PANEL DERECHO ---------- */
+.panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.caja {
+  width: 100%;
+  max-width: 420px;
+}
+
+/* colores por perfil */
+.caja[data-rol="ayuntamiento"] { --acento: var(--azul); --tinte: #eef4fa; --tinte-borde: #c7d5e3; }
+.caja[data-rol="organizador"] { --acento: var(--verde); --tinte: #eff6f2; --tinte-borde: #c5dbd0; }
+.caja[data-rol="feriante"] { --acento: var(--granate); --tinte: #fbf0f1; --tinte-borde: #e4c5c8; }
+
+.volver {
+  display: inline-block;
+  
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--gris);
+  text-decoration: none;
+  margin-bottom: 36px;
+}
+.volver:hover { color: var(--azul); text-decoration: underline; }
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  line-height: 1.1;
+  color: var(--azul);
+  margin: 0 0 10px 0;
+}
+
+.intro {
+  color: var(--gris);
+  font-size: 16px;
+  margin: 0 0 28px 0;
+}
+
+/* ---------- selector de perfil ---------- */
+.roles {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.rol {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px 6px;
+  border-radius: 8px;
+  border: 1px solid var(--borde);
+  background: white;
+  color: var(--gris);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.rol:hover { border-color: var(--acento); color: var(--acento); }
+
+.rol.activo {
+  background: var(--tinte);
+  border-color: var(--acento);
+  color: var(--acento);
+}
+
+/* ---------- campos ---------- */
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 9px;
+  border: 1px solid var(--borde);
+  background: white;
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 16px;
+  margin-bottom: 20px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input[type="file"] {
+  padding: 10px 12px;
+  font-size: 13px;
+}
+.input[type="file"]::file-selector-button {
+  margin-right: 10px;
+  padding: 7px 10px;
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  background: var(--crema);
+  color: var(--azul);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+.input::placeholder { color: var(--gris); opacity: 0.7; }
+.input:focus {
+  border-color: var(--acento);
+  box-shadow: 0 0 0 3px var(--tinte);
+}
+.input.con-error { border-color: var(--granate); }
+.input:disabled { background: var(--crema); }
+
+.campo-password { position: relative; }
+.campo-password .input { padding-right: 92px; }
+
+.ver {
+  position: absolute;
+  right: 8px;
+  top: 7px;
+  border: none;
+  background: transparent;
+  color: var(--gris);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.ver:hover { color: var(--azul); background: var(--crema); }
+
+/* ---------- error ---------- */
+.error {
+  color: var(--granate);
+  background: #fbf0f1;
+  border: 1px solid #e4c5c8;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 11px 14px;
+  margin-bottom: 20px;
+}
+
+.error.exito {
+  color: var(--verde);
+  background: #eff6f2;
+  border-color: #c5dbd0;
+}
+
+.ayuda-documento {
+  margin: -12px 0 20px;
+  color: var(--gris);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ---------- botones ---------- */
+.btn-entrar {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--acento);
+  color: white;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.15s;
+}
+.btn-entrar:hover { filter: brightness(1.18); }
+.btn-entrar:active { transform: translateY(1px); }
+.btn-entrar:disabled { cursor: default; opacity: 0.7; filter: none; }
+
+.pie {
+  text-align: center;
+  font-size: 14px;
+  color: var(--gris);
+  margin: 26px 0 0 0;
+}
+.pie a {
+  color: var(--amarillo-hover);
+  font-weight: 600;
+  text-decoration: none;
+}
+.pie a:hover { text-decoration: underline; }
+
+/* ---------- sesion iniciada ---------- */
+.exito { text-align: center; }
+
+.exito-marca {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 24px auto;
+  border-radius: 50%;
+  background: var(--tinte);
+  border: 1px solid var(--tinte-borde);
+  color: var(--acento);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.exito-marca svg { width: 30px; height: 30px; }
+
+.exito h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px;
+  color: var(--azul);
+  margin: 0 0 10px 0;
+}
+.exito p {
+  color: var(--gris);
+  font-size: 17px;
+  line-height: 1.5;
+  margin: 0 0 32px 0;
+}
+
+.btn-cerrar {
+  padding: 14px 32px;
+  border-radius: 10px;
+  border: 1px solid var(--acento);
+  background: transparent;
+  color: var(--acento);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-cerrar:hover { background: var(--tinte); }
+
+/* ---------- foco visible con teclado ---------- */
+button:focus-visible, a:focus-visible {
+  outline: 3px solid var(--amarillo);
+  outline-offset: 2px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .pagina { grid-template-columns: 1fr; }
+
+  .lateral {
+    padding: 28px 24px;
+    gap: 20px;
+  }
+  .lateral-texto h2 { font-size: 34px; margin-bottom: 12px; }
+  .lateral-texto p { font-size: 16px; }
+  .leyenda { display: none; }
+
+  .panel { padding: 36px 20px 56px 20px; }
+}
+
+@media (max-width: 420px) {
+  h1 { font-size: 34px; }
+  .rol { font-size: 13px; padding: 10px 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+
+/* ---------- campos nuevos del registro ---------- */
+.fila { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+select.input {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 42px;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23767268' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+}
+
+@media (max-width: 420px) {
+  .fila { grid-template-columns: 1fr; gap: 0; }
+}

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f4">
+  <title>Ferias | MediaFeria</title>
+  <link rel="icon" href="/assets/images/mediaferia-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/features.css">
+  <script src="/assets/js/session.js" defer></script>
+  <script src="/assets/js/api.js" defer></script>
+  <script src="/assets/js/ferias.js" defer></script>
+</head>
+<body>
+  <header class="feature-header">
+    <a class="feature-brand" href="/pages/dashboard.html">MediaFeria</a>
+    <nav class="feature-nav" aria-label="Navegación">
+      <a href="/pages/dashboard.html">Panel</a>
+      <a href="/pages/ferias.html" aria-current="page">Ferias</a>
+      <a href="/pages/solicitudes.html">Solicitudes</a>
+      <a href="/pages/chat.html">Chats</a>
+      <a href="/pages/pagos.html">Pagos</a>
+    </nav>
+  </header>
+  <main class="feature-main">
+    <section class="feature-intro">
+      <p class="feature-kicker">MEDIAFERIA · FERIAS</p>
+      <h1>Ferias y espacios</h1>
+      <p id="role-intro">Gestiona las ferias vinculadas a tu perfil.</p>
+    </section>
+    <p id="page-message" class="feature-message" role="status" aria-live="polite"></p>
+
+    <section id="create-fair-panel" class="feature-panel" hidden>
+      <h2>Publicar una feria</h2>
+      <p class="feature-muted">La feria se enviará al ayuntamiento seleccionado para su aprobación.</p>
+      <form id="create-fair-form" class="feature-form">
+        <label>Nombre de la feria<input name="nombre" required minlength="3" maxlength="120"></label>
+        <label>Ayuntamiento<select name="ayuntamientoId" required><option value="">Selecciona un ayuntamiento</option></select></label>
+        <label>Localidad<input name="localidad" required minlength="2" maxlength="100"></label>
+        <label>Provincia<input name="provincia" maxlength="100"></label>
+        <label>Fecha de inicio<input name="fechaInicio" type="date" required></label>
+        <label>Fecha de fin<input name="fechaFin" type="date" required></label>
+        <label class="full-width">Descripción<textarea name="descripcion" maxlength="2000"></textarea></label>
+        <label>Nombre del espacio<input name="nombreEspacio" required minlength="2" maxlength="100"></label>
+        <label>Precio del espacio (€)<input name="precio" type="number" min="0.5" max="100000" step="0.01" required></label>
+        <label>Superficie (m²)<input name="metrosCuadrados" type="number" min="1" max="10000" step="0.1" required></label>
+        <div class="full-width"><button class="feature-button" type="submit">Enviar al ayuntamiento</button></div>
+      </form>
+    </section>
+
+    <section id="municipality-panel" class="feature-panel" hidden>
+      <h2>Ferias de mi ayuntamiento</h2>
+      <div id="municipality-fairs" class="feature-list"></div>
+    </section>
+
+    <section id="vendor-fairs-panel" class="feature-panel" hidden>
+      <h2>Ferias abiertas</h2>
+      <div id="open-fairs" class="feature-grid"></div>
+    </section>
+
+    <section id="organizer-fairs-panel" class="feature-panel" hidden>
+      <h2>Ferias que organizo</h2>
+      <div id="organizer-fairs" class="feature-grid"></div>
+    </section>
+
+    <section id="vendor-requests-panel" class="feature-panel" hidden>
+      <h2>Mis inscripciones</h2>
+      <div id="vendor-requests" class="feature-grid"></div>
+    </section>
+  </main>
+</body>
+</html>

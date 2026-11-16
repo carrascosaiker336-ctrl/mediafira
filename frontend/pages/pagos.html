@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f4ef">
+    <title>Pagos | MediaFeria</title>
+    <link rel="icon" href="/assets/images/mediaferia-logo.png">
+    <link rel="stylesheet" href="/assets/css/pagos.css">
+    <script src="/assets/js/api.js" defer></script>
+    <script src="/assets/js/session.js" defer></script>
+    <script src="/assets/js/pagos.js" defer></script>
+</head>
+
+<body>
+    <header class="site-header">
+        <a class="brand" href="/pages/dashboard.html" aria-label="MediaFeria, volver al panel">
+            <img src="/assets/images/mediaferia-logo.png" alt="">
+            <span>MediaFeria</span>
+        </a>
+        <a class="back-link" href="/pages/dashboard.html">Volver al panel</a>
+    </header>
+
+    <main id="payment-app" class="payment-main" hidden>
+        <section class="modal" aria-labelledby="payment-title">
+            <div class="form">
+                <div class="credit-card-info--form">
+                    <div class="demo-banner">
+                        <span class="demo-dot" aria-hidden="true"></span>
+                        STRIPE CHECKOUT · MODO TEST
+                    </div>
+
+                    <div id="payment-form-view">
+                        <p class="eyebrow">Zona de feriantes</p>
+                        <h1 id="payment-title">Paga tus solicitudes</h1>
+                        <p class="intro">Elige una solicitud aprobada para continuar al checkout seguro de Stripe.</p>
+                        <p id="payment-message" class="payment-message" role="status" aria-live="polite" hidden></p>
+                        <div id="request-list" class="request-list" aria-label="Solicitudes y estado de pago"></div>
+                        <section class="request-card test-checkout-card" aria-labelledby="test-checkout-title">
+                            <div class="request-card-heading">
+                                <div>
+                                    <h2 id="test-checkout-title">Probar redirección a Stripe</h2>
+                                    <p class="request-space">Checkout de sandbox; no se registra como pago de una
+                                        solicitud.</p>
+                                </div>
+                                <span class="request-status">TEST</span>
+                            </div>
+                            <div class="request-card-total">
+                                <span>Importe de prueba</span>
+                                <strong>30,00 €</strong>
+                            </div>
+                            <button id="stripe-test-checkout" class="purchase--btn request-payment-button" type="button">
+                                Continuar a Stripe
+                            </button>
+                        </section>
+                        <p class="privacy-note">El importe se obtiene del espacio aprobado. Los datos de pago se
+                            introducen únicamente en Stripe.</p>
+                    </div>
+
+                    <section id="payment-success" class="success-view" aria-labelledby="success-title"
+                        aria-live="polite" hidden>
+                        <div class="success-icon" aria-hidden="true">✓</div>
+                        <p class="eyebrow">Stripe · Modo test</p>
+                        <h2 id="success-title">Pago de prueba completado</h2>
+                        <p id="success-message">Stripe confirmó el pago de prueba. No se realizó un cobro real.</p>
+                        <a class="return-button" href="/pages/dashboard.html">Volver al panel</a>
+                    </section>
+                </div>
+            </div>
+        </section>
+
+        <p class="access-note">Solo los feriantes pueden pagar solicitudes aprobadas. El backend verifica cada pago con
+            Stripe.</p>
+    </main>
+
+    <footer class="site-footer">MediaFeria <span aria-hidden="true">·</span> Entorno de pruebas</footer>
+</body>
+
+</html>

@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel de administración de BonoLocal">
+  <title>BonoLocal | Panel de administración</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/frontend/assets/css/perfiles.css">
+</head>
+<body>
+  <div class="site-shell">
+
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="BonoLocal, inicio">
+        <span class="brand-mark" aria-hidden="true">B</span>
+        <span>Bono<span>Local</span></span>
+      </a>
+
+      <div class="search-wrap">
+        <label for="search-input">Buscar en el panel</label>
+        <div class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="10.8" cy="10.8" r="6.8"></circle>
+            <path d="m16 16 5 5"></path>
+          </svg>
+          <input id="search-input" type="search" placeholder="Buscar usuarios, perfiles...">
+        </div>
+      </div>
+
+      <details class="account-menu">
+        <summary>
+          <span class="avatar avatar--small">AD</span>
+          <span>Mi cuenta</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
+        </summary>
+        <nav class="account-menu__panel" aria-label="Menú de cuenta">
+          <a href="#perfil-admin">Mi perfil</a>
+          <a href="#actividad">Actividad</a>
+          <span></span>
+          <a class="account-menu__logout" href="#cerrar-sesion">Cerrar sesión</a>
+        </nav>
+      </details>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div>
+          <p class="eyebrow"><span></span> PANEL DE CONTROL</p>
+          <h1>Gestiona tu comunidad con <em>facilidad.</em></h1>
+          <p>
+            Bienvenido a BonoLocal. Desde aquí puedes consultar los perfiles,
+            revisar la actividad y gestionar tu espacio de trabajo.
+          </p>
+        </div>
+
+        <div class="intro__doodle" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <path d="M15 72c18-32 37-42 57-30 13 8 18 25 31 21M31 91c18-5 35-4 52 5M72 17c-5 12-6 22-2 32"></path>
+            <circle cx="91" cy="27" r="8"></circle>
+          </svg>
+        </div>
+      </section>
+
+      <div class="dashboard-layout">
+        <section class="profiles" aria-labelledby="profiles-title">
+
+          <div class="section-heading">
+            <div>
+              <p class="kicker">TU ESPACIO</p>
+              <h2 id="profiles-title">Perfiles y usuarios</h2>
+            </div>
+            <p>Consulta la información de cada perfil</p>
+          </div>
+
+          <div class="profile-grid">
+
+            <article class="profile-card profile-card--admin" id="perfil-admin">
+              <div class="profile-card__top">
+                <div class="avatar">AD</div>
+                <span class="role-badge"><span></span> Administrador</span>
+              </div>
+              <div class="identity">
+                <h3>Administrador</h3>
+                <p>Control general de la plataforma</p>
+              </div>
+              <dl class="details">
+                <div>
+                  <dt>Permisos</dt>
+                  <dd>Todos</dd>
+                </div>
+                <div>
+                  <dt>Estado</dt>
+                  <dd class="account-state"><span></span> Activo</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="profile-card profile-card--organizer">
+              <div class="profile-card__top">
+                <div class="avatar">OR</div>
+                <span class="role-badge"><span></span> Organizador</span>
+              </div>
+              <div class="identity">
+                <h3>Organizador</h3>
+                <p>Gestión de campañas y eventos</p>
+              </div>
+              <dl class="details">
+                <div>
+                  <dt>Permisos</dt>
+                  <dd>Eventos</dd>
+                </div>
+                <div>
+                  <dt>Estado</dt>
+                  <dd class="account-state"><span></span> Activo</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="profile-card profile-card--council">
+              <div class="profile-card__top">
+                <div class="avatar">AY</div>
+                <span class="role-badge"><span></span> Ayuntamiento</span>
+              </div>
+              <div class="identity">
+                <h3>Ayuntamiento</h3>
+                <p>Administración municipal</p>
+              </div>
+              <dl class="details">
+                <div>
+                  <dt>Permisos</dt>
+                  <dd>Gestión local</dd>
+                </div>
+                <div>
+                  <dt>Estado</dt>
+                  <dd class="account-state"><span></span> Activo</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="profile-card profile-card--vendor">
+              <div class="profile-card__top">
+                <div class="avatar">CO</div>
+                <span class="role-badge"><span></span> Comerciante</span>
+              </div>
+              <div class="identity">
+                <h3>Comerciante</h3>
+                <p>Gestión de su comercio</p>
+              </div>
+              <dl class="details">
+                <div>
+                  <dt>Permisos</dt>
+                  <dd>Comercio</dd>
+                </div>
+                <div>
+                  <dt>Estado</dt>
+                  <dd class="account-state"><span></span> Activo</dd>
+                </div>
+              </dl>
+            </article>
+
+            <article class="profile-card profile-card--universal" style="grid-column:1/-1">
+              <div class="profile-summary">
+                <div class="profile-card__top">
+                  <div class="avatar avatar--large">BU</div>
+                  <span class="role-badge">Perfil general</span>
+                </div>
+                <div class="identity identity--hero">
+                  <p>ACCESO GENERAL</p>
+                  <h3>Información de la cuenta</h3>
+                  <span>Opciones y datos generales de los usuarios.</span>
+                </div>
+              </div>
+
+              <div class="profile-accordions">
+                <details class="profile-dropdown">
+                  <summary>
+                    <span class="dropdown-icon">◎</span>
+                    <span>
+                      <strong>Datos de cuenta</strong>
+                      <small>Información básica del usuario</small>
+                    </span>
+                    <svg class="dropdown-chevron" viewBox="0 0 24 24">
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </summary>
+
+                  <dl class="details details--account">
+                    <div>
+                      <dt>Usuario</dt>
+                      <dd>Nombre de usuario</dd>
+                    </div>
+                    <div>
+                      <dt>Correo</dt>
+                      <dd>usuario@bonolocal.com</dd>
+                    </div>
+                  </dl>
+                </details>
+
+                <details class="profile-dropdown">
+                  <summary>
+                    <span class="dropdown-icon">⚙</span>
+                    <span>
+                      <strong>Configuración</strong>
+                      <small>Preferencias de la cuenta</small>
+                    </span>
+                    <svg class="dropdown-chevron" viewBox="0 0 24 24">
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </summary>
+
+                  <div class="settings-preview">
+                    <p class="settings-note">
+                      Estas son opciones de ejemplo para la configuración de la cuenta.
+                    </p>
+
+                    <div class="photo-setting">
+                      <div class="photo-setting__preview">BU</div>
+                      <div>
+                        <label for="photo">Foto de perfil</label>
+                        <input id="photo" type="file" accept="image/*">
+                        <small>Selecciona una imagen desde tu dispositivo.</small>
+                      </div>
+                    </div>
+
+                    <div class="settings-fields">
+                      <div>
+                        <label for="name">Nombre</label>
+                        <input id="name" type="text" placeholder="Tu nombre">
+                      </div>
+                      <div>
+                        <label for="email">Correo electrónico</label>
+                        <input id="email" type="email" placeholder="tu@email.com">
+                      </div>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </article>
+          </div>
+
+          <div class="help-strip">
+            <span>?</span>
+            <p>
+              <strong>¿Necesitas ayuda?</strong>
+              Consulta la información de cada perfil para conocer sus funciones y permisos.
+            </p>
+          </div>
+
+          <div class="dashboard-sections" id="actividad">
+            <section class="dashboard-panel">
+              <div class="dashboard-panel__heading">
+                <span class="panel-icon">▤</span>
+                <div>
+                  <p class="kicker">RESUMEN</p>
+                  <h2>Actividad reciente</h2>
+                </div>
+              </div>
+
+              <div class="activity-grid">
+                <div class="empty-state">
+                  <strong>Sin actividad todavía</strong>
+                  <p>Cuando haya movimientos, aparecerán aquí.</p>
+                </div>
+                <div class="empty-state">
+                  <strong>Usuarios recientes</strong>
+                  <p>Aún no hay usuarios para mostrar.</p>
+                </div>
+              </div>
+            </section>
+
+            <section class="dashboard-panel dashboard-panel--compact">
+              <div class="dashboard-panel__heading">
+                <span class="panel-icon">✦</span>
+                <div>
+                  <p class="kicker">BONOLOCAL</p>
+                  <h2>Tu comunidad</h2>
+                </div>
+              </div>
+              <p class="panel-empty">
+                Gestiona tu espacio y mantén toda la información organizada desde un mismo lugar.
+              </p>
+            </section>
+          </div>
+
+          <p class="logout-note" id="cerrar-sesion">
+            Recuerda cerrar sesión cuando termines de utilizar el panel.
+          </p>
+        </section>
+
+        <aside class="side-column">
+          <article class="story-card" tabindex="0">
+            <img
+              src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85"
+              alt="Interior de un pequeño comercio o restaurante"
+            >
+
+            <div class="story-card__hint">
+              <span>Descubre BonoLocal</span>
+              <span class="story-card__arrow">↗</span>
+            </div>
+
+            <div class="story-card__reveal">
+              <span class="story-card__arrow story-card__arrow--light">↗</span>
+              <p class="kicker">COMERCIO LOCAL</p>
+              <h2>Impulsa los negocios de tu comunidad.</h2>
+              <p>
+                BonoLocal conecta personas, comercios y comunidad para dar vida al comercio de proximidad.
+              </p>
+            </div>
+          </article>
+
+          <div class="static-note">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3v18M3 12h18"></path>
+            </svg>
+            <p>
+              <strong>Panel informativo</strong>
+              Este panel es una maqueta visual. Los datos y las acciones se pueden conectar más adelante con tu base de datos.
+            </p>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer>
+      Hecho para <span>♥</span> la comunidad local · BonoLocal
+    </footer>
+  </div>
+</body>
+</html>

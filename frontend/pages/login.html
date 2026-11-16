@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mediaferia | Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">  <!-- FUENTE: Playfair-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Average+Sans&family=Clarity+City:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> <!-- FUENTE: Average Sans-->
+    <!-- todos los estilos estan en css.css -->
+    <link rel="stylesheet" href="/assets/css/login.css">
+</head>
+<body>
+<!-- HEADER -->
+    <header>
+        <!--LOGO Principal arriba izq-->
+        <a class="logo" href="/index.html" aria-label="MediaFeria, inicio">
+            <img class="logo-image" src="/assets/images/mediaferia-logo.png" alt="">
+            <span class="logo-nombre">media<em>feria</em></span>
+        </a>
+        <div>
+            <a href="/index.html" class="btn-inicio">Inicio</a>
+        </div>
+    </header>
+    <div class="auth-shell">
+        <div class="hero-visual" aria-hidden="true">
+            <div class="visual-orb visual-orb--one"></div>
+            <div class="visual-orb visual-orb--two"></div>
+            <div class="visual-card visual-card--back"></div>
+            <div class="visual-card visual-card--front">
+                <span class="visual-badge">media feria</span>
+                <strong>Conecta tu feria.</strong>
+            </div>
+        </div>
+
+        <div class="tarjeta">
+            <form id="login-form" class="form">
+                <p class="form-title">Inicia sesión</p>
+                <div class="input-container">
+                    <input type="email" id="perfil" name="email" placeholder="Correo electrónico" autocomplete="username" required>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="contrasena" name="password" placeholder="Contraseña" autocomplete="current-password" required>
+                </div>
+                <p id="error" role="status" aria-live="polite"></p>
+                <button type="submit" class="submit">Entrar</button>
+                <p class="signup-link">
+                    ¿No tienes cuenta?
+                    <a href="/pages/registro.html">Regístrate</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="/assets/js/api.js" defer></script>
+    <script src="/assets/js/auth.js" defer></script>
+    <script>
+      const slides = Array.from(document.querySelectorAll('.promo-slide'));
+      const dots = Array.from(document.querySelectorAll('.promo-dot'));
+      let activeSlide = 0;
+
+      function showSlide(index) {
+        activeSlide = (index + slides.length) % slides.length;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === activeSlide);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === activeSlide);
+          dot.setAttribute('aria-pressed', i === activeSlide ? 'true' : 'false');
+        });
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          showSlide(Number(dot.dataset.index));
+        });
+      });
+
+      setInterval(() => showSlide(activeSlide + 1), 4200);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,139 @@
+:root {
+  color-scheme: light;
+  --azul: #16213e;
+  --dorado: #c8963e;
+  --crema: #faf9f4;
+  --borde: #e7e2d6;
+  --texto: #1a1a1a;
+  --gris: #767268;
+  --blanco: #ffffff;
+  font-family: Inter, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--crema);
+  color: var(--texto);
+}
+
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; }
+
+.feature-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px clamp(18px, 5vw, 72px);
+  background: var(--blanco);
+  border-bottom: 1px solid var(--borde);
+}
+
+.feature-brand {
+  color: var(--azul);
+  font-family: "Playfair Display", serif;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.feature-nav { display: flex; flex-wrap: wrap; gap: 18px; }
+.feature-nav a, .feature-back { color: var(--gris); font-size: 13px; font-weight: 600; }
+.feature-nav a:hover, .feature-back:hover { color: var(--azul); }
+
+.feature-main {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 42px 0 64px;
+}
+
+.feature-intro { margin-bottom: 28px; }
+.feature-intro p { color: var(--gris); line-height: 1.65; }
+.feature-intro h1 { margin: 8px 0; color: var(--azul); font: 700 clamp(30px, 5vw, 44px)/1.15 "Playfair Display", serif; }
+.feature-kicker { color: var(--dorado) !important; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+
+.feature-panel {
+  margin: 18px 0;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--blanco);
+  box-shadow: 0 12px 32px rgba(22, 33, 62, .05);
+}
+
+.feature-panel h2 { margin: 0 0 16px; color: var(--azul); font: 700 24px "Playfair Display", serif; }
+.feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
+.feature-form { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.feature-form label { display: grid; gap: 6px; color: var(--gris); font-size: 13px; font-weight: 600; }
+.feature-form label.full-width { grid-column: 1 / -1; }
+.feature-form input, .feature-form select, .feature-form textarea, .chat-select, .chat-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background: white;
+  color: var(--texto);
+}
+.feature-form textarea { min-height: 100px; resize: vertical; }
+
+.feature-button {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 15px;
+  border: 1px solid var(--azul);
+  border-radius: 8px;
+  background: var(--azul);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+.feature-button:hover { background: #243457; }
+.feature-button:disabled { opacity: .6; cursor: wait; }
+.feature-button--secondary { border-color: var(--borde); background: white; color: var(--azul); }
+.feature-button--secondary:hover { background: #f7f5ef; }
+.feature-button--danger { border-color: #9c3d38; background: #9c3d38; }
+.feature-actions { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 14px; }
+
+.feature-message { min-height: 1.5em; margin: 10px 0 0; color: #8d302b; font-size: 13px; }
+.feature-message[data-type="success"] { color: #26734d; }
+.feature-muted, .feature-empty { color: var(--gris); font-size: 14px; line-height: 1.6; }
+.feature-list { display: grid; gap: 12px; }
+.feature-card { padding: 16px; border: 1px solid var(--borde); border-radius: 10px; background: #fffdfa; }
+.feature-card h3 { margin: 0 0 7px; color: var(--azul); font-size: 17px; }
+.feature-card p { margin: 5px 0; color: var(--gris); font-size: 13px; line-height: 1.6; }
+.feature-card strong { color: var(--texto); }
+.feature-chip { display: inline-block; padding: 5px 9px; border-radius: 99px; background: #f3ead7; color: #70511e; font-size: 11px; font-weight: 700; }
+
+.chat-layout { display: grid; grid-template-columns: minmax(220px, .7fr) minmax(0, 1.7fr); gap: 16px; min-height: 520px; }
+.chat-sidebar, .chat-room { min-width: 0; padding: 18px; border: 1px solid var(--borde); border-radius: 12px; background: white; }
+.chat-sidebar h2, .chat-room h2 { margin: 0 0 12px; color: var(--azul); font: 700 21px "Playfair Display", serif; }
+.chat-start { display: grid; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--borde); }
+.chat-list { display: grid; gap: 6px; margin-top: 12px; }
+.chat-thread { width: 100%; padding: 10px; border: 1px solid transparent; border-radius: 8px; background: transparent; text-align: left; cursor: pointer; }
+.chat-thread:hover, .chat-thread[aria-current="true"] { border-color: var(--borde); background: #faf8f1; }
+.chat-thread strong, .chat-thread span { display: block; }
+.chat-thread strong { color: var(--azul); font-size: 13px; }
+.chat-thread span { margin-top: 3px; color: var(--gris); font-size: 11px; }
+.chat-messages { display: flex; min-height: 390px; max-height: 56vh; flex-direction: column; gap: 10px; overflow-y: auto; padding: 12px 2px; }
+.chat-bubble { max-width: min(80%, 540px); padding: 10px 12px; border-radius: 12px; background: #f2f1ed; overflow-wrap: anywhere; }
+.chat-bubble--mine { align-self: flex-end; background: #eaf0fa; }
+.chat-bubble p { margin: 0; font-size: 14px; line-height: 1.5; white-space: pre-wrap; }
+.chat-bubble time { display: block; margin-top: 5px; color: var(--gris); font-size: 10px; }
+.chat-send { display: flex; gap: 8px; border-top: 1px solid var(--borde); padding-top: 12px; }
+.chat-send .chat-input { flex: 1; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+@media (max-width: 720px) {
+  .feature-header { align-items: flex-start; flex-direction: column; }
+  .feature-nav { gap: 12px; }
+  .feature-form, .chat-layout { grid-template-columns: 1fr; }
+  .feature-form label.full-width { grid-column: auto; }
+  .chat-messages { min-height: 280px; max-height: 45vh; }
+}

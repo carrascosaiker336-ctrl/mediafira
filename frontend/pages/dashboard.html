@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Paneles de trabajo de MediaFeria para cada tipo de perfil.">
+  <meta name="theme-color" content="#16213e">
+  <title>MediaFeria | Dashboard</title>
+  <link rel="icon" type="image/png" href="/assets/images/mediaferia-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+  <script src="/assets/js/session.js" defer></script>
+  <script src="/assets/js/api.js" defer></script>
+  <script src="/assets/js/dashboard.js" defer></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/index.html" aria-label="MediaFeria, inicio">
+        <img class="brand-logo" src="/assets/images/mediaferia-logo.png" alt="">
+        <span class="brand-name">media<em>feria</em></span>
+      </a>
+
+      <nav class="top-nav" aria-label="Navegación principal">
+        <a href="#inicio" aria-current="page">Dashboard</a>
+        <a href="#dashboard">Mi espacio</a>
+        <a href="/pages/ferias.html" data-roles="organizador,ayuntamiento,feriante">Ferias</a>
+        <a href="/pages/solicitudes.html" data-roles="organizador">Solicitudes</a>
+        <a href="/pages/chat.html" data-roles="organizador,ayuntamiento,feriante">Chats</a>
+      </nav>
+      <button class="logout-button" id="logout" type="button">Cerrar sesión</button>
+    </header>
+
+    <main id="inicio" class="content-wrap">
+      <noscript>
+        <p class="noscript-message">Activa JavaScript para cargar el dashboard de tu perfil.</p>
+      </noscript>
+      <section class="page-intro" aria-labelledby="page-title">
+        <p class="eyebrow"><span aria-hidden="true"></span> ESPACIO DE TRABAJO</p>
+        <h1 id="page-title">Tu panel de <em>MediaFeria</em></h1>
+        <p>
+          Aquí aparece el espacio de trabajo asociado a tu cuenta.
+        </p>
+      </section>
+
+      <section class="dashboard-switch" id="dashboard" aria-label="Dashboard de usuario">
+        <div class="dashboard-views">
+          <section class="dashboard-view dashboard-view--admin" data-dashboard-role="admin" aria-labelledby="admin-title">
+            <header class="view-heading">
+              <div>
+                <p class="view-kicker">PANEL DE CONTROL</p>
+                <h2 id="admin-title">Administración general</h2>
+                <p>Resumen de usuarios, ferias y solicitudes de la plataforma.</p>
+              </div>
+              <span class="view-badge">Administrador</span>
+            </header>
+
+            <div class="metric-grid">
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">U</span>
+                <p>Usuarios registrados</p>
+                <strong>—</strong>
+                <small>Resumen de cuentas</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">F</span>
+                <p>Ferias</p>
+                <strong>—</strong>
+                <small>Todos los estados</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">S</span>
+                <p>Solicitudes pendientes</p>
+                <strong>—</strong>
+                <small>Por revisar</small>
+              </article>
+            </div>
+
+            <div class="module-grid">
+              <article class="module-card" id="admin-users">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">01</span>
+                  <div><h3>Usuarios y perfiles</h3><p>Consulta las cuentas de MediaFeria.</p></div>
+                </div>
+              </article>
+              <article class="module-card" id="admin-fairs">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">02</span>
+                  <div><h3>Ferias</h3><p>Revisa ferias abiertas, cerradas o finalizadas.</p></div>
+                </div>
+              </article>
+              <article class="module-card" id="admin-requests">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">03</span>
+                  <div><h3>Solicitudes</h3><p>Consulta solicitudes y su estado.</p></div>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="dashboard-view dashboard-view--organizer" data-dashboard-role="organizador" aria-labelledby="organizer-title">
+            <header class="view-heading">
+              <div>
+                <p class="view-kicker">ORGANIZACIÓN</p>
+                <h2 id="organizer-title">Tus ferias, en un solo lugar</h2>
+                <p>Coordina la programación y consulta las solicitudes asociadas.</p>
+              </div>
+              <span class="view-badge">Organizador</span>
+            </header>
+
+            <div class="metric-grid">
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">F</span>
+                <p>Mis ferias</p>
+                <strong>—</strong>
+                <small>Ferias organizadas</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">S</span>
+                <p>Solicitudes</p>
+                <strong>—</strong>
+                <small>Vinculadas a tus ferias</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">E</span>
+                <p>Espacios</p>
+                <strong>—</strong>
+                <small>Disponibilidad registrada</small>
+              </article>
+            </div>
+
+            <div class="workspace-grid">
+              <article class="module-card module-card--large" id="organizer-fairs">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">01</span>
+                  <div><h3>Programación de ferias</h3><p>Consulta fechas, localidad y estado.</p></div>
+                </div>
+                <div class="empty-state">
+                  <strong>Aún no hay ferias para mostrar</strong>
+                  <p>Cuando se conecten tus datos, aparecerán aquí.</p>
+                </div>
+              </article>
+              <article class="module-card" id="organizer-requests">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">02</span>
+                  <div><h3>Solicitudes recibidas</h3><p>Seguimiento de solicitudes por feria.</p></div>
+                </div>
+                <div class="empty-state empty-state--compact">
+                  <strong>Sin solicitudes</strong>
+                  <p>No hay actividad para mostrar.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="dashboard-view dashboard-view--council" data-dashboard-role="ayuntamiento" aria-labelledby="council-title">
+            <header class="view-heading">
+              <div>
+                <p class="view-kicker">GESTIÓN MUNICIPAL</p>
+                <h2 id="council-title">Actividad de tu ayuntamiento</h2>
+                <p>Consulta ferias municipales y solicitudes vinculadas.</p>
+              </div>
+              <span class="view-badge">Ayuntamiento</span>
+            </header>
+
+            <div class="metric-grid">
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">F</span>
+                <p>Ferias municipales</p>
+                <strong>—</strong>
+                <small>Programadas o activas</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">S</span>
+                <p>Solicitudes pendientes</p>
+                <strong>—</strong>
+                <small>Estado por consultar</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">E</span>
+                <p>Espacios</p>
+                <strong>—</strong>
+                <small>Asociados a tus ferias</small>
+              </article>
+            </div>
+
+            <div class="workspace-grid">
+              <article class="module-card module-card--large" id="council-fairs">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">01</span>
+                  <div><h3>Calendario municipal</h3><p>Fechas, localidades y estado de las ferias.</p></div>
+                </div>
+                <div class="empty-state">
+                  <strong>No hay ferias para mostrar</strong>
+                  <p>La programación aparecerá aquí cuando haya datos disponibles.</p>
+                </div>
+              </article>
+              <article class="module-card" id="council-requests">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">02</span>
+                  <div><h3>Solicitudes</h3><p>Estado de las solicitudes para tus ferias.</p></div>
+                </div>
+                <div class="empty-state empty-state--compact">
+                  <strong>Sin solicitudes pendientes</strong>
+                  <p>No hay actividad para mostrar.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="dashboard-view dashboard-view--vendor" data-dashboard-role="feriante" aria-labelledby="vendor-title">
+            <header class="view-heading">
+              <div>
+                <p class="view-kicker">ESPACIO DEL FERIANTE</p>
+                <h2 id="vendor-title">Prepara tu próxima feria</h2>
+                <p>Consulta tus solicitudes, documentación y pagos.</p>
+              </div>
+              <span class="view-badge">Feriante</span>
+            </header>
+
+            <div class="metric-grid">
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">S</span>
+                <p>Mis solicitudes</p>
+                <strong>—</strong>
+                <small>Enviadas a ferias</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">D</span>
+                <p>Documentación</p>
+                <strong>—</strong>
+                <small>Archivos asociados</small>
+              </article>
+              <article class="metric-card">
+                <span class="metric-icon" aria-hidden="true">P</span>
+                <p>Pagos pendientes</p>
+                <strong id="vendor-pending-payments-count">—</strong>
+                <small>Estado de tus pagos</small>
+              </article>
+            </div>
+
+            <div class="workspace-grid">
+              <article class="module-card module-card--large" id="vendor-requests">
+                <div class="module-heading">
+                  <span class="module-icon" aria-hidden="true">01</span>
+                  <div><h3>Mis solicitudes</h3><p>Consulta el estado de cada inscripción.</p></div>
+                </div>
+                <div class="empty-state">
+                  <strong>Todavía no tienes solicitudes</strong>
+                  <p>Cuando envíes una solicitud para una feria, su estado aparecerá aquí.</p>
+                </div>
+              </article>
+              <div class="stacked-modules">
+                <article class="module-card" id="vendor-documents">
+                  <div class="module-heading">
+                    <span class="module-icon" aria-hidden="true">02</span>
+                    <div><h3>Documentación</h3><p>Archivos asociados a tus solicitudes.</p></div>
+                  </div>
+                  <p class="module-footnote">Sin documentos para mostrar.</p>
+                </article>
+                <article class="module-card" id="vendor-payments">
+                  <div class="module-heading">
+                    <span class="module-icon" aria-hidden="true">03</span>
+                    <div><h3>Pagos</h3><p>Consulta el estado de tus pagos.</p></div>
+                  </div>
+                  <p class="module-footnote" id="vendor-payment-summary">Consultando solicitudes aprobadas…</p>
+                  <a class="payment-link" href="/pages/pagos.html">Ver solicitudes y pagar con Stripe <span aria-hidden="true">→</span></a>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <footer class="page-footer">
+        <span>MediaFeria</span>
+        <span>Paneles por perfil</span>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
