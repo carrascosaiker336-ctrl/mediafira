@@ -12,7 +12,10 @@ npm start
 
 Configura `MONGODB_URI` y `JWT_SECRET` en `backend/.env`. El servidor lee
 únicamente ese archivo y sus valores prevalecen sobre variables heredadas del
-entorno. Usa el puerto `3000` por defecto y permite configurar `PORT` y `HOST`.
+entorno. Si en algún momento usaste la variable antigua `MONGO_URI`, el
+servidor la acepta como alias, pero la forma recomendada es `MONGODB_URI`.
+Usa el puerto `3000` por defecto y permite configurar `PORT` y `HOST`; en
+producción suele ser necesario `HOST=0.0.0.0`.
 Configura también `JWT_SECRET` con al menos 32 caracteres aleatorios en el
 mismo archivo; no lo subas al repositorio. Puedes generar uno localmente con:
 
@@ -77,10 +80,19 @@ Configura la clave de prueba de Stripe en `backend/.env` (no la compartas ni la
 subas al repositorio). El servidor acepta `STRIPE_SECRET_KEY` o `StripeApiKey`:
 
 ```env
+MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/mediaferia
+JWT_SECRET=tu_clave_muy_segura
+PORT=3000
+HOST=127.0.0.1
+APP_URL=http://127.0.0.1:3000
+ALLOWED_ORIGINS=http://127.0.0.1:3000,https://mediaferia.onrender.com
 StripeApiKey=sk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
-APP_URL=http://127.0.0.1:3000
 ```
+
+En Render, añade exactamente `MONGODB_URI` y no `MONGO_URI` si quieres evitar
+fallos de conexión. Si hay un frontend externo, además configura la whitelist
+`ALLOWED_ORIGINS` con el dominio de Render o el dominio de producción.
 
 Configura el webhook de Stripe para `POST /api/pagos/webhook` con los eventos
 `checkout.session.completed` y `checkout.session.expired`. El retorno de

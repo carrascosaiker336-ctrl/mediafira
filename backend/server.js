@@ -17,10 +17,14 @@ function cargarConfiguracion() {
         throw new Error("No se pudo leer backend/.env");
     }
 
-    const mongoUri = process.env.MONGODB_URI;
+    if (!process.env.MONGODB_URI && process.env.MONGO_URI) {
+        process.env.MONGODB_URI = process.env.MONGO_URI;
+    }
+
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
 
     if (!mongoUri) {
-        throw new Error("Falta MONGODB_URI en backend/.env");
+        throw new Error("Falta MONGODB_URI en backend/.env. Si usas una variable antigua, renómbrala a MONGODB_URI.");
     }
 
     if (!/^mongodb(\+srv)?:\/\//i.test(mongoUri)) {
@@ -31,7 +35,7 @@ function cargarConfiguracion() {
         throw new Error("JWT_SECRET debe tener al menos 32 caracteres en backend/.env");
     }
 
-    const port = Number(process.env.PORT || 3000);
+    const port = Number(process.env.PORT || (process.env.NODE_ENV === "production" ? 10000 : 3000));
     if (!Number.isInteger(port) || port < 1 || port > 65535) {
         throw new Error("PORT debe ser un número entero entre 1 y 65535.");
     }
@@ -42,7 +46,7 @@ function cargarConfiguracion() {
     }
 
     return {
-        host: process.env.HOST || "127.0.0.1",
+        host: process.env.HOST || (process.env.NODE_ENV === "production" ? "0.0.0.0" : "127.0.0.1"),
         port,
         basePath: basePath.replace(/\/+$/, "") || ""
     };

@@ -22,6 +22,50 @@ const contentTypes = {
     ".svg": "image/svg+xml"
 };
 
+function obtenerOrigensPermitidas() {
+    const configuradas = [
+        process.env.ALLOWED_ORIGINS,
+        process.env.CORS_ORIGINS,
+        process.env.FRONTEND_URL,
+        process.env.APP_URL,
+        process.env.RENDER_EXTERNAL_URL,
+        process.env.RENDER_PRODUCTION_URL,
+        process.env.RENDER_EXTERNAL_HOSTNAME
+    ]
+        .flatMap((valor) => typeof valor === "string" ? valor.split(",") : [])
+        .map((valor) => valor.trim())
+        .filter(Boolean);
+
+    return Array.from(new Set([
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        ...configuradas
+    ].map((valor) => valor.replace(/\/+$/, ""))));
+}
+
+function aplicarCabecerasCors(req, res) {
+    const origin = req.headers.origin;
+
+    if (!origin) {
+        return;
+    }
+
+    const originsPermitidas = obtenerOrigensPermitidas();
+    const originNormalizada = origin.replace(/\/+$/, "");
+
+    if (!originsPermitidas.includes(originNormalizada)) {
+        return;
+    }
+
+    res.setHeader("Access-Control-Allow-Origin", originNormalizada);
+    res.setHeader("Vary", "Origin");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+}
+
 async function servirFrontend(req, res, pathname) {
     if (req.method !== "GET" && req.method !== "HEAD") {
         sendJson(res, 405, { mensaje: "Método no permitido." });
@@ -96,6 +140,14 @@ async function app(req, res) {
     let pathname;
 
     try {
+        aplicarCabecerasCors(req, res);
+
+        if (req.method === "OPTIONS") {
+            res.writeHead(204);
+            res.end();
+            return;
+        }
+
         pathname = normalizarRutaSolicitada(req.url);
 
         if (pathname.startsWith("/api/")) {
