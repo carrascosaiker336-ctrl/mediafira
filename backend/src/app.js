@@ -12,6 +12,7 @@ const { sendJson } = require("./utils/response");
 const { authMiddleware } = require("./middleware/authMiddleware");
 
 const frontendDirectory = path.resolve(__dirname, "..", "..", "frontend");
+const basePath = (process.env.BASE_PATH || "").trim().replace(/\/+$/, "");
 const contentTypes = {
     ".css": "text/css; charset=utf-8",
     ".html": "text/html; charset=utf-8",
@@ -73,11 +74,29 @@ async function servirFrontend(req, res, pathname) {
     }
 }
 
+function normalizarRutaSolicitada(reqUrl) {
+    const pathname = new URL(reqUrl, "http://localhost").pathname;
+
+    if (!basePath) {
+        return pathname;
+    }
+
+    if (pathname === basePath) {
+        return "/";
+    }
+
+    if (pathname.startsWith(`${basePath}/`)) {
+        return pathname.slice(basePath.length) || "/";
+    }
+
+    return pathname;
+}
+
 async function app(req, res) {
     let pathname;
 
     try {
-        pathname = new URL(req.url, "http://localhost").pathname;
+        pathname = normalizarRutaSolicitada(req.url);
 
         if (pathname.startsWith("/api/")) {
             req.pathname = pathname;

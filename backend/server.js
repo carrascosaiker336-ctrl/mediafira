@@ -36,9 +36,15 @@ function cargarConfiguracion() {
         throw new Error("PORT debe ser un número entero entre 1 y 65535.");
     }
 
+    const basePath = (process.env.BASE_PATH || "").trim();
+    if (basePath && (!basePath.startsWith("/") || basePath.includes(" "))) {
+        throw new Error("BASE_PATH debe empezar por '/' y no puede incluir espacios.");
+    }
+
     return {
         host: process.env.HOST || "127.0.0.1",
-        port
+        port,
+        basePath: basePath.replace(/\/+$/, "") || ""
     };
 }
 
@@ -95,7 +101,8 @@ async function cerrarServidor(server, signal) {
 }
 
 async function iniciarServidor() {
-    const { host, port } = cargarConfiguracion();
+    const { host, port, basePath } = cargarConfiguracion();
+    process.env.BASE_PATH = basePath;
     await conectarDB();
 
     const server = http.createServer(app);

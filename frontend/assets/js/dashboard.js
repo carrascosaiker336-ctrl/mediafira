@@ -9,12 +9,12 @@ try {
     });
 } catch {
     window.mediaferiaSession.clear();
-    window.location.replace("/pages/login.html");
+    window.location.replace(window.mediaferiaResolveUrl("/pages/login.html"));
 }
 
 document.querySelector("#logout").addEventListener("click", () => {
     window.mediaferiaSession.clear();
-    window.location.replace("/pages/login.html");
+    window.location.replace(window.mediaferiaResolveUrl("/pages/login.html"));
 });
 
 if (claims && claims.rol === "feriante") {

@@ -38,7 +38,7 @@ loginForm.addEventListener("submit", async (event) => {
         }
 
         sessionStorage.setItem("mediaferiaToken", result.token);
-        window.location.assign("/pages/dashboard.html");
+        window.location.assign(window.mediaferiaResolveUrl("/pages/dashboard.html"));
     } catch (error) {
         message.classList.remove("login-success");
         message.textContent = error.message;
