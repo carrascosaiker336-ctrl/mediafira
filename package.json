@@ -16,5 +16,8 @@
         "mongodb": "^7.8.0",
         "mongoose": "^8.19.1",
         "stripe": "^23.1.0"
+    },
+    "allowScripts": {
+        "bcrypt@6.0.0": true
     }
 }
