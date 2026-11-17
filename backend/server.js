@@ -6,6 +6,8 @@ const backendEnvPath = path.join(__dirname, ".env");
 const { conectarDB, desconectarDB } = require("./src/config/database");
 const app = require("./src/app");
 
+// Se valida la configuración del backend antes de arrancar la API.
+// Esto evita errores silenciosos si faltan variables como MONGODB_URI o JWT_SECRET.
 function cargarConfiguracion() {
     const envResult = dotenv.config({
         path: backendEnvPath,
@@ -68,6 +70,8 @@ function mensajeErrorHttp(error, port, host) {
     return "No se pudo iniciar el servidor HTTP.";
 }
 
+// Espera a que el servidor HTTP esté realmente escuchando.
+// Si el puerto está ocupado o el host no existe, devolvemos el error claro para depurar.
 function escuchar(server, host, port) {
     return new Promise((resolve, reject) => {
         const alEscuchar = () => {
@@ -104,6 +108,7 @@ async function cerrarServidor(server, signal) {
     });
 }
 
+// Arranque principal: carga variables, conecta MongoDB y levanta el servidor HTTP.
 async function iniciarServidor() {
     const { host, port, basePath } = cargarConfiguracion();
     process.env.BASE_PATH = basePath;

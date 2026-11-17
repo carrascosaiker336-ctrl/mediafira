@@ -8,12 +8,14 @@ const { sendJson } = require("../utils/response");
 const verificarFeriante = roleMiddleware("feriante");
 const verificarOrganizador = roleMiddleware("organizador");
 
+// Helper para devolver errores HTTP con un código concreto y un mensaje claro.
 function errorHttp(message, statusCode) {
     const error = new Error(message);
     error.statusCode = statusCode;
     return error;
 }
 
+// Devuelve la lista de solicitudes del feriante autenticado y sus datos de feria/espacio.
 async function listarMisSolicitudes(req, res) {
     if (!verificarFeriante(req, res)) {
         return;
@@ -47,6 +49,7 @@ async function listarMisSolicitudes(req, res) {
     });
 }
 
+// Lista todas las solicitudes de las ferias gestionadas por el organizador actual.
 async function listarSolicitudesDeFerias(req, res) {
     if (!verificarOrganizador(req, res)) {
         return;
@@ -80,11 +83,13 @@ async function listarSolicitudesDeFerias(req, res) {
     });
 }
 
+// Crea una nueva solicitud para una feria con un espacio concreto.
 async function crearSolicitud(req, res) {
     if (!verificarFeriante(req, res)) {
         return;
     }
 
+    // Se valida que el cuerpo tenga la estructura esperada antes de continuar.
     const body = req.body && typeof req.body === "object" &&
         !Array.isArray(req.body) ? req.body : {};
     const { feriaId, espacioId } = body;
@@ -96,6 +101,7 @@ async function crearSolicitud(req, res) {
         throw errorHttp("Selecciona una feria y un espacio válidos.", 400);
     }
 
+    // Comprueba que la feria sigue abierta y que el espacio pertenece a ella.
     const feria = await Feria.findOne({ _id: feriaId, estado: "abierta" });
     const espacioExistente = await Espacio.findOne({
         _id: espacioId,
@@ -106,6 +112,7 @@ async function crearSolicitud(req, res) {
         throw errorHttp("La feria o el espacio ya no están disponibles.", 409);
     }
 
+    // Un feriante no puede tener más de una solicitud activa para la misma feria.
     const existente = await Solicitud.findOne({
         feriante: req.auth.id,
         feria: feria._id
@@ -115,6 +122,7 @@ async function crearSolicitud(req, res) {
         throw errorHttp("Ya tienes una solicitud para esta feria.", 409);
     }
 
+    // Reserva el espacio de forma atómica para evitar que dos feriantes lo pidan a la vez.
     const espacio = await Espacio.findOneAndUpdate(
         {
             _id: espacioId,
@@ -151,6 +159,7 @@ async function crearSolicitud(req, res) {
     });
 }
 
+// Aprueba o rechaza la solicitud, según la decisión del organizador.
 async function actualizarEstado(req, res) {
     if (!verificarOrganizador(req, res)) {
         return;
@@ -174,6 +183,7 @@ async function actualizarEstado(req, res) {
         throw errorHttp("No se encontró la solicitud en tus ferias.", 404);
     }
 
+    // Solo se pueden aceptar o rechazar solicitudes pendientes.
     if (solicitud.estado !== "pendiente") {
         throw errorHttp("Esta solicitud ya fue revisada.", 409);
     }

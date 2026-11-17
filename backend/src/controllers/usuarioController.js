@@ -16,6 +16,7 @@ const rolesPublicos = new Set([
     "ayuntamiento"
 ]);
 
+// Valida que el documento de identidad se haya enviado en un formato seguro y correcto.
 function leerDocumentoIdentidad(value) {
     if (!value || typeof value !== "object" || Array.isArray(value)) {
         return null;
@@ -68,6 +69,7 @@ function leerDocumentoIdentidad(value) {
     return { nombreArchivo, tipoArchivo, archivo };
 }
 
+// Registra un nuevo usuario, validando nombre, credenciales y documentación requerida.
 async function crearUsuario(req, res) {
     const body = req.body && typeof req.body === "object" && !Array.isArray(req.body)
         ? req.body
@@ -84,6 +86,7 @@ async function crearUsuario(req, res) {
     const documentoIdentidad = leerDocumentoIdentidad(body.documentoIdentidad);
     const rol = body.rol === undefined ? "feriante" : body.rol;
 
+    // La validación central evita registros incompletos o maliciosos.
     if (
         nombre.length < 2 ||
         nombre.length > 100 ||
@@ -153,6 +156,7 @@ async function crearUsuario(req, res) {
     return true;
 }
 
+// Inicia sesión comprobando credenciales, documentación y estado activo de la cuenta.
 async function loginUsuario(req, res) {
     const body = req.body && typeof req.body === "object" && !Array.isArray(req.body)
         ? req.body

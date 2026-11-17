@@ -13,6 +13,7 @@ const { authMiddleware } = require("./middleware/authMiddleware");
 
 const frontendDirectory = path.resolve(__dirname, "..", "..", "frontend");
 const basePath = (process.env.BASE_PATH || "").trim().replace(/\/+$/, "");
+// Este mapa ayuda a devolver el tipo de contenido correcto para cada archivo público.
 const contentTypes = {
     ".css": "text/css; charset=utf-8",
     ".html": "text/html; charset=utf-8",
@@ -45,6 +46,7 @@ function obtenerOrigensPermitidas() {
     ].map((valor) => valor.replace(/\/+$/, ""))));
 }
 
+// CORS: solo aceptamos peticiones desde orígenes confiables para evitar abuso externo.
 function aplicarCabecerasCors(req, res) {
     const origin = req.headers.origin;
 
@@ -136,6 +138,7 @@ function normalizarRutaSolicitada(reqUrl) {
     return pathname;
 }
 
+// Punto central del router: decide si la petición va a la API o al frontend estático.
 async function app(req, res) {
     let pathname;
 
